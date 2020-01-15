@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import '../node_modules/bulma/css/bulma.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './components/Home.vue'
 import About from './components/About.vue'
 

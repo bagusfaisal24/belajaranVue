@@ -1,32 +1,21 @@
 <template>
   <div class="app">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="#">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-        </a>
-      </div>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #5ee689;">
+      <a class="navbar-brand fa fa-home" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" >
-            <router-link to="/"><a>Home</a></router-link>
-          </a>
-
-          <a class="navbar-item">
-            <router-link to="/about"><a>About</a></router-link>
-          </a>
-
-          <div class="navbar-item has-dropdown is-hoverable">
-            <div class="navbar-dropdown">
-            </div>
-          </div>
-        </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-          </div>
-        </div>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="navbar-brand" href="#">Menu 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="navbar-brand" href="#">Menu 2</a>
+          </li>
+        </ul>
+        <a class="navbar-brand fa fa-sign-out" href="#"></a>
       </div>
     </nav>
     <router-view>
