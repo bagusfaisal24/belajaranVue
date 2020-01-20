@@ -9,10 +9,10 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
-            <router-link to="/"><a class="navbar-brand" href="#"> Repos</a></router-link>
+            <router-link to="/"><a class="navbar-brand" href="#"> Home</a></router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about"><a class="navbar-brand" href="#"> Profile</a></router-link>
+            <router-link to="/member"><a class="navbar-brand" href="#"> Peserta</a></router-link>
           </li>
         </ul>
         <a class="navbar-brand fa fa-sign-out" href="#"> Sign out</a>

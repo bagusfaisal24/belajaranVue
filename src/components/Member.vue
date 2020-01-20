@@ -15,7 +15,7 @@ export default {
   components: {},
   methods: {
     getProfile () {
-      fetch('https://api.github.com/users/bagusfaisal24')
+      fetch('http://localhost:8080/v1/membership/member')
         .then(r => r.json())
         .then((data) => {
           this.user = data
