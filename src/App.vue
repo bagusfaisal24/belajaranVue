@@ -15,7 +15,7 @@
             <router-link to="/member"><a class="navbar-brand" href="#"> Peserta</a></router-link>
           </li>
         </ul>
-        <a class="navbar-brand fa fa-sign-out" href="#"> Sign out</a>
+        <a class="navbar-brand fa fa-sign-out" href="#"> Keluar</a>
       </div>
     </nav>
       <div class="footer-copyright text-center py-3" style="color: #ffffff; background-color: #000000; position: fixed; bottom: 0; width: 100%">© 2020 Copyright:
