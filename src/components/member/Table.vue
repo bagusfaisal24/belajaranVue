@@ -10,7 +10,7 @@
     <b-row>
       <b-col cols="12" class="my-1">
         <b-form-group
-          label="Filter"
+          label="Pencarian"
           label-cols-sm="8"
           label-align-sm="right"
           label-size="sm"
@@ -54,11 +54,8 @@
           </template>
 
           <template v-slot:cell(actions)="row">
-            <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
-              Info modal
-            </b-button>
             <b-button size="sm" @click="row.toggleDetails">
-              {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+              {{ row.detailsShowing ? 'Sembunyikan' : 'Lihat' }} Detail
             </b-button>
           </template>
 
@@ -83,7 +80,6 @@
       </b-col>
     </b-row>
 
-    <!-- Info modal -->
     <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
       <pre>{{ infoModal.content }}</pre>
     </b-modal>
@@ -120,18 +116,8 @@ export default {
         { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }
       ],
       fields: [
-        { key: 'name', label: 'Person Full name', sortable: true, sortDirection: 'desc' },
-        { key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
-        {
-          key: 'isActive',
-          label: 'is Active',
-          formatter: (value, key, item) => {
-            return value ? 'Yes' : 'No'
-          },
-          sortable: true,
-          sortByFormatted: true,
-          filterByFormatted: true
-        },
+        { key: 'name', label: 'Nama', sortable: true, sortDirection: 'desc' },
+        { key: 'age', label: 'Tempat Lahir', sortable: true, class: 'text-center' },
         { key: 'actions', label: 'Actions' }
       ],
       totalRows: 1,
@@ -164,11 +150,6 @@ export default {
     this.totalRows = this.items.length
   },
   methods: {
-    info (item, index, button) {
-      this.infoModal.title = `Row index: ${index}`
-      this.infoModal.content = JSON.stringify(item, null, 2)
-      this.$root.$emit('bv::show::modal', this.infoModal.id, button)
-    },
     resetInfoModal () {
       this.infoModal.title = ''
       this.infoModal.content = ''
