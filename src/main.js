@@ -6,6 +6,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './components/Home.vue'
 // import About from './components/member/Member.vue'
 import About from './components/member/Table.vue'
+import axios from 'axios'
+
+axios.defaults.baseURL = process.env.VUE_APP_ROOT_API
+axios.defaults.headers.common.Authorization = process.env.VUE_APP_AUTH_TOKEN
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
