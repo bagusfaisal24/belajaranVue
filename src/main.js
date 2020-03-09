@@ -4,8 +4,7 @@ import { BootstrapVue } from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './components/Home.vue'
-// import About from './components/member/Member.vue'
-import About from './components/member/Table.vue'
+import About from './components/member/Member.vue'
 import axios from 'axios'
 
 axios.defaults.baseURL = process.env.VUE_APP_ROOT_API
