@@ -25,34 +25,8 @@
       <b-row>
         <b-col>
           <b-button variant="outline-primary" v-b-modal.modal-1>Tambah Data</b-button>
+          <MemberForm/>
         </b-col>
-        <b-modal id="modal-1" title="Tambah Data Peserta">
-          <div role="group">
-            <b-form-group
-              label-cols-sm="3"
-              label="Nama:">
-              <b-form-input id="name">
-              </b-form-input>
-            </b-form-group>
-            <b-form-group
-              label-cols-sm="3"
-              label="Tempat Lahir:">
-              <b-form-input id="dob-place">
-              </b-form-input>
-            </b-form-group>
-            <b-form-group
-              label-cols-sm="3"
-              label="Pekerjaan">
-              <b-form-input id="dob-place">
-              </b-form-input>
-            </b-form-group>
-            <b-form-group
-              label-cols-sm="3"
-              label="Tanggal Lahir">
-              <b-form-datepicker id="example-datepicker" v-model="value" class="mb-2"/>
-            </b-form-group>
-            </div>
-        </b-modal>
       </b-row>
     </b-row>
     <b-row>
@@ -114,9 +88,11 @@
 
 <script>
 import MemberSvc from '../../service/MemberSvc'
+import MemberForm from './MemberForm'
 
 export default {
   name: 'Table',
+  components: { MemberForm },
   data () {
     return {
       members: [],

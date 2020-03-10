@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import { BootstrapVue } from 'bootstrap-vue'
+import { BootstrapVue, FormDatepickerPlugin } from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './components/Home.vue'
@@ -13,6 +13,7 @@ axios.defaults.headers.common.Authorization = process.env.VUE_APP_AUTH_TOKEN
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
+Vue.use(FormDatepickerPlugin)
 
 const routes = [
   { path: '/', component: Home },
