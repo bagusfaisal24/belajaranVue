@@ -45,9 +45,6 @@
           :sort-desc.sync="sortDesc"
           :sort-direction="sortDirection"
           @filtered="onFiltered">
-          <template slot="id" slot-scope="row">
-            {{ row.value.id }}
-          </template>
           <template slot="name" slot-scope="row">
             {{ row.value.name }}
           </template>
@@ -97,7 +94,6 @@ export default {
     return {
       members: [],
       fields: [
-        { key: 'id', label: 'id', class: 'text-center' },
         { key: 'name', label: 'Nama', class: 'text-center' },
         { key: 'dobPlace', label: 'Tempat Lahir', class: 'text-center' },
         { key: 'actions', label: 'Actions' }
