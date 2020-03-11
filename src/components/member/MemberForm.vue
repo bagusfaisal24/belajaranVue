@@ -1,5 +1,7 @@
 <template>
-  <b-modal id="modal-1" size="lg" title="Tambah Data Peserta" hide-footer>
+  <div>
+    <b-button id="show-btn" variant="outline-primary" @click="showModal" v-b-modal.modal-1>Tambah Data</b-button>
+    <b-modal ref="myModal" size="lg" hide-footer title="Tambah Data Peserta">
     <div role="group">
       <b-form-group
         label-cols-sm="3"
@@ -38,12 +40,12 @@
       </b-form-group>
       <hr/>
     </div>
-    <b-button class="mt-2" variant="outline-primary" block @click="toggleModal">Simpan</b-button>
+    <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-button>
   </b-modal>
+  </div>
 </template>
 
 <script>
-
 import moment from 'moment'
 import MemberSvc from '../../service/MemberSvc'
 
@@ -58,9 +60,8 @@ export default {
     }
   },
   methods: {
-    toggleModal (evt) {
+    hideModal () {
       this.isSubmit()
-      evt.preventDefault()
       const data = {
         name: this.name,
         birthDate: moment(this.birthDate).locale('ID').format('DD-MM-YYYY'),
@@ -73,9 +74,13 @@ export default {
           this.showNotification('Berhasil Menyimpan')
         })
         .catch(e => console.log(e))
+      this.$refs['myModal'].hide()
     },
     isSubmit () {
       this.submit = !this.submit
+    },
+    showModal () {
+      this.$refs['myModal'].show()
     },
     showNotification (message) {
       const variant = 'outline-primary'

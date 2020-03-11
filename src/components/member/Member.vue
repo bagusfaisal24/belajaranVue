@@ -24,7 +24,6 @@
       </b-col>
       <b-row>
         <b-col>
-          <b-button variant="outline-primary" v-b-modal.modal-1>Tambah Data</b-button>
           <MemberForm/>
         </b-col>
       </b-row>
@@ -76,10 +75,6 @@
         />
       </b-col>
     </b-row>
-
-    <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
-      <pre>{{ infoModal.content }}</pre>
-    </b-modal>
   </b-container>
 </template>
 
@@ -110,11 +105,6 @@ export default {
         id: 'info-modal',
         title: '',
         content: ''
-      },
-      formMember: {
-        name: '',
-        dobPlace: '',
-        job: ''
       }
     }
   },
@@ -134,10 +124,6 @@ export default {
     this.getDataMember()
   },
   methods: {
-    resetInfoModal () {
-      this.infoModal.title = ''
-      this.infoModal.content = ''
-    },
     getDataMember () {
       MemberSvc.getMember()
         .then((res) => {
