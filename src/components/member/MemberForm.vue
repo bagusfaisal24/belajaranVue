@@ -34,8 +34,7 @@
           locale="id"
           size="md"
           calendar-width="290"
-          start-weekday=1
-          hide-header=false/>
+          start-weekday=1/>
         </b-form-datepicker>
       </b-form-group>
       <hr/>
