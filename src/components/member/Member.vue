@@ -57,7 +57,10 @@
           </template>
           <template v-slot:row-details="{ item }">
             <b-card>
-              <p>{{ item.name }}</p>
+              <p>Nama: {{ item.name }}</p>
+              <p>Tempat Lahir : {{ item.dobPlace }}</p>
+              <p>Tanggal Lahir : {{ formatingDate(item.birthDate) }}</p>
+              <p>Pekerjaan : {{ item.job }}</p>
             </b-card>
           </template>
         </b-table>
@@ -79,6 +82,7 @@
 <script>
 import MemberSvc from '../../service/MemberSvc'
 import MemberForm from './MemberForm'
+import moment from 'moment'
 
 export default {
   name: 'Table',
@@ -127,6 +131,9 @@ export default {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
       this.currentPage = 1
+    },
+    formatingDate (date) {
+      return moment(date).locale('ID').format('DD MMMM YYYY')
     },
     toggleDetails (row) {
       if (row._showDetails) {
