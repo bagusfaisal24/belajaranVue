@@ -51,9 +51,18 @@
             {{ row.value.dobPlace }}
           </template>
           <template v-slot:cell(actions)="{ detailsShowing, item }">
-            <b-button size="sm" @click="toggleDetails(item)">
-              {{ detailsShowing ? 'Sembunyikan' : 'Lihat' }} Detail
-            </b-button>
+            <b-row class="mb-1">
+              <b-col cols="0">
+                <b-button size="sm" @click="toggleDetails(item)"  variant="warning">
+                  {{ detailsShowing ? 'Sembunyikan' : 'Lihat' }} Detail
+                </b-button>
+              </b-col>
+              <b-col cols="3">
+                <b-button size="sm" variant="info">
+                  Update
+                </b-button>
+              </b-col>
+            </b-row>
           </template>
           <template v-slot:row-details="{ item }">
             <b-card>
