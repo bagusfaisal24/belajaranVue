@@ -1,45 +1,56 @@
 <template>
-  <div>
-    <div role="group">
-      <b-form-group
-        label-cols-sm="3"
-        label-cols-lg="3"
-        label="Nama">
-        <b-form-input
-          id="name"
-          v-model="name"/>
-      </b-form-group>
-      <b-form-group
-        label-cols-sm="3"
-        label="Tempat Lahir">
-        <b-form-input
-          id="dob-place"
-          v-model="dobPlace"/>
-      </b-form-group>
-      <b-form-group
-        label-cols-sm="3"
-        label="Pekerjaan">
-        <b-form-input
-          id="dob-place"
-          v-model="job"/>
-      </b-form-group>
-      <b-form-group
-        label-cols-sm="3"
-        label="Tanggal Lahir">
-        <b-form-datepicker
-          id="start-date"
-          placeholder="Silakan pilih tanggal"
-          v-model="birthDate"
-          locale="id"
-          size="md"
-          calendar-width="290"
-          start-weekday=1/>
-        </b-form-datepicker>
-      </b-form-group>
-      <hr/>
-    </div>
-    <b-button class="mt-3" variant="outline-primary" block @click="hideModal">Simpan</b-button>
-  </div>
+  <b-container>
+    <b-row>
+      <b-col>
+      </b-col>
+      <b-col cols="10" class="my-1">
+        <h3>
+          Form Update Data Peserta
+        </h3>
+        <div role="group">
+          <b-form-group
+            label-cols-sm="3"
+            label-cols-lg="3"
+            label="Nama">
+            <b-form-input
+              id="name"
+              v-model="name"/>
+          </b-form-group>
+          <b-form-group
+            label-cols-sm="3"
+            label="Tempat Lahir">
+            <b-form-input
+              id="dob-place"
+              v-model="dobPlace"/>
+          </b-form-group>
+          <b-form-group
+            label-cols-sm="3"
+            label="Pekerjaan">
+            <b-form-input
+              id="dob-place"
+              v-model="job"/>
+          </b-form-group>
+          <b-form-group
+            label-cols-sm="3"
+            label="Tanggal Lahir">
+            <b-form-datepicker
+              id="start-date"
+              placeholder="Silakan pilih tanggal"
+              v-model="birthDate"
+              locale="id"
+              size="md"
+              calendar-width="290"
+              start-weekday=1/>
+            </b-form-datepicker>
+          </b-form-group>
+          <hr/>
+        </div>
+        <b-button class="mt-3" variant="outline-primary" block @click="hideModal">Simpan</b-button>
+      </b-col>
+      <b-col>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

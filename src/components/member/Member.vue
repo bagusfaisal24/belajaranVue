@@ -104,8 +104,8 @@ export default {
     return {
       members: [],
       fields: [
-        { key: 'name', label: 'Nama', class: 'text-center' },
-        { key: 'dobPlace', label: 'Tempat Lahir', class: 'text-center' },
+        { key: 'name', label: 'Nama', class: 'text-left' },
+        { key: 'dobPlace', label: 'Tempat Lahir', class: 'text-left' },
         { key: 'actions', label: 'Actions' }
       ],
       totalRows: 1,
