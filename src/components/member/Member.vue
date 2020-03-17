@@ -58,9 +58,11 @@
                 </b-button>
               </b-col>
               <b-col cols="3">
-                <b-button size="sm" variant="info">
-                  Update
-                </b-button>
+                <router-link to="/update">
+                  <b-button size="sm" variant="info">
+                    Update
+                  </b-button>
+                </router-link>
               </b-col>
             </b-row>
           </template>
@@ -85,6 +87,8 @@
         />
       </b-col>
     </b-row>
+    <router-view>
+    </router-view>
   </b-container>
 </template>
 

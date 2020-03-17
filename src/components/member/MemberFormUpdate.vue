@@ -1,10 +1,9 @@
 <template>
   <div>
-    <b-button id="show-btn" variant="outline-primary" @click="showModal" v-b-modal.modal-1>Tambah Data</b-button>
-    <b-modal ref="myModal" size="lg" hide-footer title="Tambah Data Peserta">
     <div role="group">
       <b-form-group
         label-cols-sm="3"
+        label-cols-lg="3"
         label="Nama">
         <b-form-input
           id="name"
@@ -40,7 +39,6 @@
       <hr/>
     </div>
     <b-button class="mt-3" variant="outline-primary" block @click="hideModal">Simpan</b-button>
-  </b-modal>
   </div>
 </template>
 
@@ -49,7 +47,7 @@ import moment from 'moment'
 import MemberSvc from '../../service/MemberSvc'
 
 export default {
-  name: 'MemberForm',
+  name: 'UpdateMember',
   data () {
     return {
       name: '',

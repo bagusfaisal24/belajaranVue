@@ -4,7 +4,8 @@ import { BootstrapVue, FormDatepickerPlugin } from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './components/Home.vue'
-import About from './components/member/Member.vue'
+import Member from './components/member/Member.vue'
+import UpdateForm from './components/member/MemberFormUpdate.vue'
 import axios from 'axios'
 
 axios.defaults.baseURL = process.env.VUE_APP_ROOT_API
@@ -17,7 +18,8 @@ Vue.use(FormDatepickerPlugin)
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/member', component: About }
+  { path: '/member', component: Member },
+  { path: '/update', component: UpdateForm }
 ]
 
 const router = new VueRouter({ routes })
