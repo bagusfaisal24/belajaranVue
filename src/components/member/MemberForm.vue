@@ -39,7 +39,7 @@
       </b-form-group>
       <hr/>
     </div>
-    <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-button>
+    <b-button class="mt-3" variant="outline-primary" block @click="hideModal">Close Me</b-button>
   </b-modal>
   </div>
 </template>

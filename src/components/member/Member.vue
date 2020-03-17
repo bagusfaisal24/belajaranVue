@@ -50,16 +50,14 @@
           <template slot="dobPlace" slot-scope="row">
             {{ row.value.dobPlace }}
           </template>
-          <template v-slot:cell(actions)="row">
-            <b-button size="sm" @click="row.toggleDetails">
-              {{ row.detailsShowing ? 'Sembunyikan' : 'Lihat' }} Detail
+          <template v-slot:cell(actions)="{ detailsShowing, item }">
+            <b-button size="sm" @click="toggleDetails(item)">
+              {{ detailsShowing ? 'Sembunyikan' : 'Lihat' }} Detail
             </b-button>
           </template>
-          <template v-slot:row-details="row">
+          <template v-slot:row-details="{ item }">
             <b-card>
-              <ul>
-                <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
-              </ul>
+              <p>{{ item.name }}</p>
             </b-card>
           </template>
         </b-table>
@@ -100,12 +98,7 @@ export default {
       sortDesc: false,
       sortDirection: 'asc',
       filter: null,
-      filterOn: [],
-      infoModal: {
-        id: 'info-modal',
-        title: '',
-        content: ''
-      }
+      filterOn: []
     }
   },
   computed: {
@@ -134,6 +127,18 @@ export default {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
       this.currentPage = 1
+    },
+    toggleDetails (row) {
+      if (row._showDetails) {
+        this.$set(row, '_showDetails', false)
+      } else {
+        this.members.forEach(item => {
+          this.$set(item, '_showDetails', false)
+        })
+        this.$nextTick(() => {
+          this.$set(row, '_showDetails', true)
+        })
+      }
     }
   }
 }
