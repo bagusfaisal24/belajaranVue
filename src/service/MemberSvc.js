@@ -10,5 +10,13 @@ export default {
   submitForm (data) {
     return axios
       .post(MEMBER_URI, data, config)
+  },
+  getMemberById (id) {
+    return axios
+      .get(`${MEMBER_URI}${id}`)
+  },
+  updateData (data, id) {
+    return axios
+      .post(`${MEMBER_URI}${id}/update`, data, config)
   }
 }

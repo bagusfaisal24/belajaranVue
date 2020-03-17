@@ -58,11 +58,10 @@
                 </b-button>
               </b-col>
               <b-col cols="3">
-                <router-link to="/update">
-                  <b-button size="sm" variant="info">
+                  <b-button size="sm" variant="info"
+                            :to="{ name: 'UpdateMember', params: { id: item.id } }">
                     Update
                   </b-button>
-                </router-link>
               </b-col>
             </b-row>
           </template>
@@ -98,7 +97,7 @@ import MemberForm from './MemberForm'
 import moment from 'moment'
 
 export default {
-  name: 'Table',
+  name: 'Member',
   components: { MemberForm },
   data () {
     return {

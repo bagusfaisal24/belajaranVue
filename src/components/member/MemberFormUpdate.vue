@@ -14,21 +14,21 @@
             label="Nama">
             <b-form-input
               id="name"
-              v-model="name"/>
+              v-model="memberDetail.name"/>
           </b-form-group>
           <b-form-group
             label-cols-sm="3"
             label="Tempat Lahir">
             <b-form-input
               id="dob-place"
-              v-model="dobPlace"/>
+              v-model="memberDetail.dobPlace"/>
           </b-form-group>
           <b-form-group
             label-cols-sm="3"
             label="Pekerjaan">
             <b-form-input
               id="dob-place"
-              v-model="job"/>
+              v-model="memberDetail.job"/>
           </b-form-group>
           <b-form-group
             label-cols-sm="3"
@@ -36,16 +36,16 @@
             <b-form-datepicker
               id="start-date"
               placeholder="Silakan pilih tanggal"
-              v-model="birthDate"
+              v-model="memberDetail.birthDate"
               locale="id"
               size="md"
-              calendar-width="290"
+              calendar-width="300"
               start-weekday=1/>
             </b-form-datepicker>
           </b-form-group>
           <hr/>
         </div>
-        <b-button class="mt-3" variant="outline-primary" block @click="hideModal">Simpan</b-button>
+        <b-button class="mt-3" variant="outline-primary" block @click="postData">Simpan</b-button>
       </b-col>
       <b-col>
       </b-col>
@@ -64,31 +64,41 @@ export default {
       name: '',
       birthDate: '',
       job: '',
-      dobPlace: ''
+      dobPlace: '',
+      memberDetail: {}
     }
   },
   methods: {
-    hideModal () {
+    getData (id) {
+      this.isLoading()
+      const MemberDetail = MemberSvc.getMemberById(id)
+      const promises = [MemberDetail]
+      Promise.all(promises)
+        .then((res) => {
+          this.memberDetail = res[0].data
+        })
+        .catch(e => console.log(e))
+    },
+    postData () {
       this.isSubmit()
       const data = {
-        name: this.name,
-        birthDate: moment(this.birthDate).locale('ID').format('DD-MM-YYYY'),
-        dobPlace: this.dobPlace,
-        job: this.job
+        name: this.memberDetail.name,
+        birthDate: moment(this.memberDetail.birthDate).locale('ID').format('DD-MM-YYYY'),
+        dobPlace: this.memberDetail.dobPlace,
+        job: this.memberDetail.job
       }
-      MemberSvc.submitForm(data)
+      MemberSvc.updateData(data, this.memberDetail.id)
         .then(() => {
           this.isSubmit()
           this.showNotification('Berhasil Menyimpan')
         })
         .catch(e => console.log(e))
-      this.$refs['myModal'].hide()
     },
     isSubmit () {
       this.submit = !this.submit
     },
-    showModal () {
-      this.$refs['myModal'].show()
+    isLoading () {
+      this.loading = !this.loading
     },
     showNotification (message) {
       const variant = 'outline-primary'
@@ -98,6 +108,9 @@ export default {
         variant
       })
     }
+  },
+  created () {
+    this.getData(this.$route.params.id)
   }
 }
 </script>
