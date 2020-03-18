@@ -27,16 +27,16 @@
             label-cols-sm="3"
             label="Pekerjaan">
             <b-form-input
-              id="dob-place"
+              id="job"
               v-model="memberDetail.job"/>
           </b-form-group>
           <b-form-group
             label-cols-sm="3"
             label="Tanggal Lahir">
             <b-form-datepicker
-              id="start-date"
+              id="birth-date"
               placeholder="Silakan pilih tanggal"
-              v-model="memberDetail.birthDate"
+              v-model="date"
               locale="id"
               size="md"
               calendar-width="300"
@@ -61,10 +61,7 @@ export default {
   name: 'UpdateMember',
   data () {
     return {
-      name: '',
-      birthDate: '',
-      job: '',
-      dobPlace: '',
+      date: new Date(2020, 12, 23),
       memberDetail: {}
     }
   },
@@ -99,6 +96,9 @@ export default {
     },
     isLoading () {
       this.loading = !this.loading
+    },
+    formatingDate (date) {
+      return moment(date).locale('ID').format('DD MMMM YYYY')
     },
     showNotification (message) {
       const variant = 'outline-primary'
