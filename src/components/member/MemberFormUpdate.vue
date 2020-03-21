@@ -36,7 +36,7 @@
             <b-form-datepicker
               id="birth-date"
               placeholder="Silakan pilih tanggal"
-              v-model="date"
+              v-bind:value="formatingDate(memberDetail.birthDate)"
               locale="id"
               size="md"
               calendar-width="300"
@@ -61,7 +61,6 @@ export default {
   name: 'UpdateMember',
   data () {
     return {
-      date: new Date(2020, 12, 23),
       memberDetail: {}
     }
   },
@@ -98,7 +97,7 @@ export default {
       this.loading = !this.loading
     },
     formatingDate (date) {
-      return moment(date).locale('ID').format('DD MMMM YYYY')
+      return new Date(date)
     },
     showNotification (message) {
       const variant = 'outline-primary'
