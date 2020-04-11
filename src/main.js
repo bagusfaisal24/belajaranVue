@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './components/Home.vue'
 import Member from './components/member/Member.vue'
+import Ranting from './components/ranting/Ranting.vue'
 import UpdateMember from './components/member/MemberFormUpdate.vue'
 import axios from 'axios'
 
@@ -20,7 +21,7 @@ const routes = [
   { path: '/', component: Home },
   { path: '/member', component: Member },
   { path: '/update/:id', component: UpdateMember, name: 'UpdateMember' },
-  { path: '/ranting', component: Member }
+  { path: '/ranting', component: Ranting }
 ]
 
 const router = new VueRouter({ routes })

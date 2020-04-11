@@ -24,7 +24,7 @@
       </b-col>
       <b-row>
         <b-col>
-          <MemberForm/>
+          <RantingForm/>
         </b-col>
       </b-row>
     </b-row>
@@ -81,18 +81,17 @@
 </template>
 
 <script>
-import MemberSvc from '../../service/MemberSvc'
-import MemberForm from './MemberForm'
-import moment from 'moment'
+import RantingSvc from '../../service/RantingSvc'
+import RantingForm from './RantingForm'
 
 export default {
   name: 'Ranting',
-  components: { MemberForm },
+  components: { RantingForm },
   data () {
     return {
       rantings: [],
       fields: [
-        { key: 'name', label: 'Nama', class: 'text-left' },
+        { key: 'name', label: 'Nama Ranting', class: 'text-left' },
         { key: 'actions', label: 'Actions' }
       ],
       totalRows: 1,
@@ -117,14 +116,14 @@ export default {
   },
   mounted () {
     // Set the initial number of items
-    this.totalRows = this.members.length
-    this.getDataMember()
+    this.totalRows = this.rantings.length
+    this.getDataRanting()
   },
   methods: {
-    getDataMember () {
-      MemberSvc.getMember()
+    getDataRanting () {
+      RantingSvc.getRanting()
         .then((res) => {
-          this.members = res.data
+          this.rantings = res.data
         }).catch(e => console.log(e))
     },
     onFiltered (filteredItems) {
@@ -132,14 +131,11 @@ export default {
       this.totalRows = filteredItems.length
       this.currentPage = 1
     },
-    formatingDate (date) {
-      return moment(date).locale('ID').format('DD MMMM YYYY')
-    },
     toggleDetails (row) {
       if (row._showDetails) {
         this.$set(row, '_showDetails', false)
       } else {
-        this.members.forEach(item => {
+        this.rantings.forEach(item => {
           this.$set(item, '_showDetails', false)
         })
         this.$nextTick(() => {
