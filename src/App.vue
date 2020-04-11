@@ -15,6 +15,9 @@
           <li class="nav-item">
             <router-link to="/member"><a class="navbar-brand" href="#"> Peserta</a></router-link>
           </li>
+          <li class="nav-item">
+            <router-link to="/ranting"><a class="navbar-brand" href="#"> Ranting</a></router-link>
+          </li>
         </ul>
         <a class="navbar-brand fa fa-sign-out" href="#"> Keluar</a>
       </div>

@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <h3>
-          Data Peserta Zakat
+          Data Ranting
         </h3>
       </b-col>
     </b-row>
@@ -34,7 +34,7 @@
           show-empty
           small
           stacked="md"
-          :items="members"
+          :items="rantings"
           :fields="fields"
           :current-page="currentPage"
           :per-page="perPage"
@@ -47,9 +47,6 @@
           <template slot="name" slot-scope="row">
             {{ row.value.name }}
           </template>
-          <template slot="dobPlace" slot-scope="row">
-            {{ row.value.dobPlace }}
-          </template>
           <template v-slot:cell(actions)="{ detailsShowing, item }">
             <b-row class="mb-1">
               <b-col cols="0">
@@ -57,21 +54,12 @@
                   {{ detailsShowing ? 'Sembunyikan' : 'Lihat' }} Detail
                 </b-button>
               </b-col>
-              <b-col cols="3">
-                  <b-button size="sm" variant="info"
-                            :to="{ name: 'UpdateMember', params: { id: item.id } }">
-                    Update
-                  </b-button>
-              </b-col>
             </b-row>
           </template>
           <template v-slot:row-details="{ item }">
             <b-card>
               <p>Nama: {{ item.name }}</p>
-              <p>Tempat Lahir : {{ item.dobPlace }}</p>
-              <p>Tanggal Lahir : {{ formatingDate(item.birthDate) }}</p>
-              <p>Pekerjaan : {{ item.job }}</p>
-              <p>NBM : {{ item.nbm }}</p>
+              <p>Ketua Ranting : {{ item.ketuaRanting }}</p>
             </b-card>
           </template>
         </b-table>
@@ -98,14 +86,13 @@ import MemberForm from './MemberForm'
 import moment from 'moment'
 
 export default {
-  name: 'Member',
+  name: 'Ranting',
   components: { MemberForm },
   data () {
     return {
-      members: [],
+      rantings: [],
       fields: [
         { key: 'name', label: 'Nama', class: 'text-left' },
-        { key: 'dobPlace', label: 'Tempat Lahir', class: 'text-left' },
         { key: 'actions', label: 'Actions' }
       ],
       totalRows: 1,

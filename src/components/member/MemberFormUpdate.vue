@@ -32,14 +32,23 @@
           </b-form-group>
           <b-form-group
             label-cols-sm="3"
+            label="NBM">
+            <b-form-input
+              id="nbm"
+              v-model="memberDetail.nbm"/>
+          </b-form-group>
+          <b-form-group
+            label-cols-sm="3"
             label="Tanggal Lahir">
             <b-form-datepicker
               id="birth-date"
               placeholder="Silakan pilih tanggal"
               v-bind:value="formatingDate(memberDetail.birthDate)"
+              v-on:input="change"
               locale="id"
               size="md"
               calendar-width="300"
+              disabled
               start-weekday=1/>
             </b-form-datepicker>
           </b-form-group>
@@ -59,6 +68,7 @@ import MemberSvc from '../../service/MemberSvc'
 
 export default {
   name: 'UpdateMember',
+  props: ['value'],
   data () {
     return {
       memberDetail: {}
@@ -79,9 +89,10 @@ export default {
       this.isSubmit()
       const data = {
         name: this.memberDetail.name,
-        birthDate: moment(this.memberDetail.birthDate).locale('ID').format('DD-MM-YYYY'),
+        birthDate: moment(this.formatingDate(this.memberDetail.birthDate)).locale('ID').format('DD-MM-YYYY'),
         dobPlace: this.memberDetail.dobPlace,
-        job: this.memberDetail.job
+        job: this.memberDetail.job,
+        nbm: this.memberDetail.nbm
       }
       MemberSvc.updateData(data, this.memberDetail.id)
         .then(() => {
@@ -106,6 +117,9 @@ export default {
         autoHideDelay: 5000,
         variant
       })
+    },
+    change: function ($event) {
+      this.hai = $event
     }
   },
   created () {
