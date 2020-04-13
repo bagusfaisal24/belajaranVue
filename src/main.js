@@ -7,6 +7,7 @@ import Home from './components/Home.vue'
 import Member from './components/member/Member.vue'
 import Ranting from './components/ranting/Ranting.vue'
 import UpdateMember from './components/member/MemberFormUpdate.vue'
+import UpdateRanting from './components/ranting/RantingFormUpdate.vue'
 import axios from 'axios'
 
 axios.defaults.baseURL = process.env.VUE_APP_ROOT_API
@@ -21,6 +22,7 @@ const routes = [
   { path: '/', component: Home },
   { path: '/member', component: Member },
   { path: '/update/:id', component: UpdateMember, name: 'UpdateMember' },
+  { path: '/update/:id', component: UpdateRanting, name: 'UpdateRanting' },
   { path: '/ranting', component: Ranting }
 ]
 

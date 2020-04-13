@@ -54,6 +54,12 @@
                   {{ detailsShowing ? 'Sembunyikan' : 'Lihat' }} Detail
                 </b-button>
               </b-col>
+              <b-col cols="3">
+                <b-button size="sm" variant="info"
+                          :to="{ name: 'UpdateRanting', params: { id: item.id } }">
+                  Update
+                </b-button>
+              </b-col>
             </b-row>
           </template>
           <template v-slot:row-details="{ item }">

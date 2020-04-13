@@ -68,7 +68,6 @@ import MemberSvc from '../../service/MemberSvc'
 
 export default {
   name: 'UpdateMember',
-  props: ['value'],
   data () {
     return {
       memberDetail: {}

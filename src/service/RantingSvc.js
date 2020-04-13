@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const RANTING_URI = 'v1/ranting'
+const RANTING_URI = 'v1/ranting/'
 const config = { headers: { 'Content-Type': 'application/json' } }
 
 export default {
