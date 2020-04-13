@@ -52,6 +52,14 @@
               start-weekday=1/>
             </b-form-datepicker>
           </b-form-group>
+          <b-form-group
+            label-cols-sm="3"
+            label="Ranting">
+            <label>
+              <b-form-select v-model="selected" :options="rantings"/>
+            </label>
+            <span>Selected: {{ selected }}</span>
+          </b-form-group>
           <hr/>
         </div>
         <b-button class="mt-3" variant="outline-primary" block @click="postData">Simpan</b-button>
@@ -65,12 +73,21 @@
 <script>
 import moment from 'moment'
 import MemberSvc from '../../service/MemberSvc'
+import RantingSvc from '../../service/RantingSvc'
 
 export default {
   name: 'UpdateMember',
   data () {
     return {
-      memberDetail: {}
+      rantings: [
+      ],
+      memberDetail: {},
+      selected: 'A',
+      options: [
+        { text: 'One', value: 'A' },
+        { text: 'Two', value: 'B' },
+        { text: 'Three', value: 'C' }
+      ]
     }
   },
   methods: {
@@ -83,6 +100,12 @@ export default {
           this.memberDetail = res[0].data
         })
         .catch(e => console.log(e))
+    },
+    getDataRanting () {
+      RantingSvc.getRanting()
+        .then((res) => {
+          this.rantings = res.data
+        }).catch(e => console.log(e))
     },
     postData () {
       this.isSubmit()
@@ -117,14 +140,14 @@ export default {
         variant
       })
     },
-    change: function ($event) {
-      this.hai = $event
+    created () {
+      this.getData(this.$route.params.id)
+    },
+    mounted () {
+    // Set the initial number of items
+      this.getDataRanting()
     }
-  },
-  created () {
-    this.getData(this.$route.params.id)
-  }
-}
+  } }
 </script>
 
 <style scoped>
