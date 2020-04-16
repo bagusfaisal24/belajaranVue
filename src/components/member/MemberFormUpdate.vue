@@ -44,21 +44,12 @@
               id="birth-date"
               placeholder="Silakan pilih tanggal"
               v-bind:value="formatingDate(memberDetail.birthDate)"
-              v-on:input="change"
               locale="id"
               size="md"
               calendar-width="300"
               disabled
               start-weekday=1/>
             </b-form-datepicker>
-          </b-form-group>
-          <b-form-group
-            label-cols-sm="3"
-            label="Ranting">
-            <label>
-              <b-form-select v-model="selected" :options="rantings"/>
-            </label>
-            <span>Selected: {{ selected }}</span>
           </b-form-group>
           <hr/>
         </div>
@@ -79,15 +70,8 @@ export default {
   name: 'UpdateMember',
   data () {
     return {
-      rantings: [
-      ],
       memberDetail: {},
-      selected: 'A',
-      options: [
-        { text: 'One', value: 'A' },
-        { text: 'Two', value: 'B' },
-        { text: 'Three', value: 'C' }
-      ]
+      rantings: []
     }
   },
   methods: {
@@ -102,10 +86,14 @@ export default {
         .catch(e => console.log(e))
     },
     getDataRanting () {
-      RantingSvc.getRanting()
+      this.isLoading()
+      const RantingDetail = RantingSvc.getRanting()
+      const promises = [RantingDetail]
+      Promise.all(promises)
         .then((res) => {
           this.rantings = res.data
-        }).catch(e => console.log(e))
+        })
+        .catch(e => console.log(e))
     },
     postData () {
       this.isSubmit()
@@ -139,15 +127,13 @@ export default {
         autoHideDelay: 5000,
         variant
       })
-    },
-    created () {
-      this.getData(this.$route.params.id)
-    },
-    mounted () {
-    // Set the initial number of items
-      this.getDataRanting()
     }
-  } }
+  },
+  created () {
+    this.getData(this.$route.params.id)
+    this.getDataRanting()
+  }
+}
 </script>
 
 <style scoped>
