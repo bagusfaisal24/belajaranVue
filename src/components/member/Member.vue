@@ -72,7 +72,7 @@
               <p>Tanggal Lahir : {{ formatingDate(item.birthDate) }}</p>
               <p>Pekerjaan : {{ item.job }}</p>
               <p>NBM : {{ item.nbm }}</p>
-              <p>Asal Ranting : {{ item.ranting.name }}</p>
+              <p>Ranting : {{ item.ranting.name }}</p>
             </b-card>
           </template>
         </b-table>

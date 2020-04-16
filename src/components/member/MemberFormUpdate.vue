@@ -51,6 +51,12 @@
               start-weekday=1/>
             </b-form-datepicker>
           </b-form-group>
+          <b-form-group
+            label-cols-sm="3"
+            label="Ranting">
+            <b-form-select v-model="selected" :options="AA"
+                           class="mt-3"/>
+          </b-form-group>
           <hr/>
         </div>
         <b-button class="mt-3" variant="outline-primary" block @click="postData">Simpan</b-button>
@@ -71,7 +77,8 @@ export default {
   data () {
     return {
       memberDetail: {},
-      rantings: []
+      AA: this.newData([ { id: '1', name: 'faisal' } ]),
+      selected: ''
     }
   },
   methods: {
@@ -127,6 +134,18 @@ export default {
         autoHideDelay: 5000,
         variant
       })
+    },
+    newData (data) {
+      const newData = []
+      const result = {}
+      for (let i = 0; i < data.length; i++) {
+        result['value'] = data[i].id
+        result['text'] = data[i].name
+        newData.push(result)
+      }
+      console.log(newData)
+
+      return newData
     }
   },
   created () {
