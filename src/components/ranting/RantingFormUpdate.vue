@@ -57,12 +57,21 @@ export default {
         name: this.rantingDetail.name,
         ketuaRanting: this.rantingDetail.ketuaRanting
       }
-      RantingSvc.updateData(data, this.rantingDetail.id)
-        .then(() => {
-          this.isSubmit()
-          this.showNotification('Berhasil Menyimpan')
-        })
-        .catch(e => console.log(e))
+      if (this.$route.params.type === 'new') {
+        RantingSvc.submitForm(data)
+          .then(() => {
+            this.isSubmit()
+            this.showNotification('Berhasil Menyimpan')
+          })
+          .catch(e => console.log(e))
+      } else {
+        RantingSvc.updateData(data, this.rantingDetail.id)
+          .then(() => {
+            this.isSubmit()
+            this.showNotification('Berhasil Menyimpan')
+          })
+          .catch(e => console.log(e))
+      }
     },
     isSubmit () {
       this.submit = !this.submit
@@ -83,7 +92,9 @@ export default {
     }
   },
   created () {
-    this.getData(this.$route.params.id)
+    if (this.$route.params.type === 'update') {
+      this.getData(this.$route.params.id)
+    }
   }
 }
 </script>

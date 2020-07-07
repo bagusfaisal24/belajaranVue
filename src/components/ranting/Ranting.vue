@@ -24,7 +24,7 @@
       </b-col>
       <b-row>
         <b-col>
-          <RantingForm/>
+          <b-button id="show-btn" variant="outline-primary" :to="{ name: 'CreateNewRanting', params: { type: 'new' } }">Tambah Data</b-button>
         </b-col>
       </b-row>
     </b-row>
@@ -56,7 +56,7 @@
               </b-col>
               <b-col cols="3">
                 <b-button size="sm" variant="info"
-                          :to="{ name: 'UpdateRanting', params: { id: item.id } }">
+                          :to="{ name: 'UpdateRanting', params: { id: item.id, type: 'update' } }">
                   Update
                 </b-button>
               </b-col>
@@ -88,11 +88,9 @@
 
 <script>
 import RantingSvc from '../../service/RantingSvc'
-import RantingForm from './RantingForm'
 
 export default {
   name: 'Ranting',
-  components: { RantingForm },
   data () {
     return {
       rantings: [],

@@ -41,21 +41,20 @@
             label-cols-sm="3"
             label="Tanggal Lahir">
             <b-form-datepicker
-              id="birth-date"
+              id="start-date"
               placeholder="Silakan pilih tanggal"
-              v-bind:value="formatingDate(memberDetail.birthDate)"
+              v-model="memberDetail.birthDate"
               locale="id"
               size="md"
-              calendar-width="300"
-              disabled
+              calendar-width="290"
               start-weekday=1/>
             </b-form-datepicker>
           </b-form-group>
           <b-form-group
             label-cols-sm="3"
             label="Ranting">
-            <b-form-select v-model="selected" :options="AA"
-                           class="mt-3"/>
+            <b-form-select v-model="selected" :options="newArray"/>
+            <span> {{ selected }}</span>
           </b-form-group>
           <hr/>
         </div>
@@ -77,8 +76,8 @@ export default {
   data () {
     return {
       memberDetail: {},
-      AA: this.newData([ { id: '1', name: 'faisal' } ]),
-      selected: ''
+      selected: null,
+      newArray: []
     }
   },
   methods: {
@@ -94,11 +93,14 @@ export default {
     },
     getDataRanting () {
       this.isLoading()
-      const RantingDetail = RantingSvc.getRanting()
-      const promises = [RantingDetail]
+      const DataRanting = RantingSvc.getRanting()
+      const promises = [DataRanting]
       Promise.all(promises)
         .then((res) => {
-          this.rantings = res.data
+          this.ranting = res[0].data
+          this.newArray = this.ranting.map(function (val, index) {
+            return { value: val.id, text: val.name }
+          })
         })
         .catch(e => console.log(e))
     },
@@ -109,14 +111,24 @@ export default {
         birthDate: moment(this.formatingDate(this.memberDetail.birthDate)).locale('ID').format('DD-MM-YYYY'),
         dobPlace: this.memberDetail.dobPlace,
         job: this.memberDetail.job,
-        nbm: this.memberDetail.nbm
+        nbm: this.memberDetail.nbm,
+        rantingId: this.selected
       }
-      MemberSvc.updateData(data, this.memberDetail.id)
-        .then(() => {
-          this.isSubmit()
-          this.showNotification('Berhasil Menyimpan')
-        })
-        .catch(e => console.log(e))
+      if (this.$route.params.type === 'update') {
+        MemberSvc.updateData(data, this.memberDetail.id)
+          .then(() => {
+            this.isSubmit()
+            this.showNotification('Berhasil Menyimpan')
+          })
+          .catch(e => console.log(e))
+      } else {
+        MemberSvc.submitForm(data)
+          .then(() => {
+            this.isSubmit()
+            this.showNotification('Berhasil Menyimpan')
+          })
+          .catch(e => console.log(e))
+      }
     },
     isSubmit () {
       this.submit = !this.submit
@@ -134,22 +146,13 @@ export default {
         autoHideDelay: 5000,
         variant
       })
-    },
-    newData (data) {
-      const newData = []
-      const result = {}
-      for (let i = 0; i < data.length; i++) {
-        result['value'] = data[i].id
-        result['text'] = data[i].name
-        newData.push(result)
-      }
-      console.log(newData)
-
-      return newData
     }
   },
   created () {
-    this.getData(this.$route.params.id)
+    console.log(this.$route.params.type)
+    if (this.$route.params.type === 'update') {
+      this.getData(this.$route.params.id)
+    }
     this.getDataRanting()
   }
 }

@@ -24,7 +24,7 @@
       </b-col>
       <b-row>
         <b-col>
-          <MemberForm/>
+          <b-button id="show-btn" variant="outline-primary" :to="{ name: 'CreateNewMember', params: { type: 'new' } }">Tambah Data</b-button>
         </b-col>
       </b-row>
     </b-row>
@@ -59,7 +59,7 @@
               </b-col>
               <b-col cols="3">
                   <b-button size="sm" variant="info"
-                            :to="{ name: 'UpdateMember', params: { id: item.id } }">
+                            :to="{ name: 'UpdateMember', params: { id: item.id, type: 'update' } }">
                     Update
                   </b-button>
               </b-col>
@@ -95,12 +95,10 @@
 
 <script>
 import MemberSvc from '../../service/MemberSvc'
-import MemberForm from './MemberForm'
 import moment from 'moment'
 
 export default {
   name: 'Member',
-  components: { MemberForm },
   data () {
     return {
       members: [],
