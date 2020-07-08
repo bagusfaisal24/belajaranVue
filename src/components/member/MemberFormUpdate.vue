@@ -54,7 +54,6 @@
             label-cols-sm="3"
             label="Ranting">
             <b-form-select v-model="selected" :options="newArray"/>
-            <span> {{ selected }}</span>
           </b-form-group>
           <hr/>
         </div>
@@ -70,6 +69,7 @@
 import moment from 'moment'
 import MemberSvc from '../../service/MemberSvc'
 import RantingSvc from '../../service/RantingSvc'
+import ErrorSvc from '../../ErrorSvc'
 
 export default {
   name: 'UpdateMember',
@@ -77,7 +77,8 @@ export default {
     return {
       memberDetail: {},
       selected: null,
-      newArray: []
+      newArray: [],
+      errors: {}
     }
   },
   methods: {
@@ -120,14 +121,20 @@ export default {
             this.isSubmit()
             this.showNotification('Berhasil Menyimpan')
           })
-          .catch(e => console.log(e))
+          .catch(e => {
+            this.errors = ErrorSvc.getError(e)
+            this.showToast(this.errors)
+          })
       } else {
         MemberSvc.submitForm(data)
           .then(() => {
             this.isSubmit()
             this.showNotification('Berhasil Menyimpan')
           })
-          .catch(e => console.log(e))
+          .catch(e => {
+            this.errors = ErrorSvc.getError(e)
+            this.showToast(this.errors)
+          })
       }
     },
     isSubmit () {
@@ -140,16 +147,23 @@ export default {
       return new Date(date)
     },
     showNotification (message) {
-      const variant = 'outline-primary'
+      const variant = 'success'
       this.$bvToast.toast(message, {
         title: 'Sukses',
+        autoHideDelay: 5000,
+        variant
+      })
+    },
+    showToast (message) {
+      const variant = 'danger'
+      this.$bvToast.toast(message, {
+        title: 'Terjadi Kesalahan',
         autoHideDelay: 5000,
         variant
       })
     }
   },
   created () {
-    console.log(this.$route.params.type)
     if (this.$route.params.type === 'update') {
       this.getData(this.$route.params.id)
     }

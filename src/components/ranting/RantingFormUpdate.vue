@@ -32,12 +32,14 @@
 
 <script>
 import RantingSvc from '../../service/RantingSvc'
+import ErrorSvc from '../../ErrorSvc'
 
 export default {
   name: 'UpdateRanting',
   data () {
     return {
-      rantingDetail: {}
+      rantingDetail: {},
+      errors: {}
     }
   },
   methods: {
@@ -63,14 +65,20 @@ export default {
             this.isSubmit()
             this.showNotification('Berhasil Menyimpan')
           })
-          .catch(e => console.log(e))
+          .catch(e => {
+            this.errors = ErrorSvc.getError(e)
+            this.showToast(this.errors)
+          })
       } else {
         RantingSvc.updateData(data, this.rantingDetail.id)
           .then(() => {
             this.isSubmit()
             this.showNotification('Berhasil Menyimpan')
           })
-          .catch(e => console.log(e))
+          .catch(e => {
+            this.errors = ErrorSvc.getError(e)
+            this.showToast(this.errors)
+          })
       }
     },
     isSubmit () {
@@ -80,9 +88,17 @@ export default {
       this.loading = !this.loading
     },
     showNotification (message) {
-      const variant = 'outline-primary'
+      const variant = 'success'
       this.$bvToast.toast(message, {
         title: 'Sukses',
+        autoHideDelay: 5000,
+        variant
+      })
+    },
+    showToast (message) {
+      const variant = 'danger'
+      this.$bvToast.toast(message, {
+        title: 'Terjadi Kesalahan',
         autoHideDelay: 5000,
         variant
       })
