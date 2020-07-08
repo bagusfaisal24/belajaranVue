@@ -5,7 +5,7 @@
       </b-col>
       <b-col cols="10" class="my-1">
         <h3>
-          Form Update Data Peserta
+          Form Data Muzakki
         </h3>
         <div role="group">
           <b-form-group
@@ -43,7 +43,7 @@
             <b-form-datepicker
               id="start-date"
               placeholder="Silakan pilih tanggal"
-              v-model="memberDetail.birthDate"
+              v-model="birthDate"
               locale="id"
               size="md"
               calendar-width="290"
@@ -78,7 +78,8 @@ export default {
       memberDetail: {},
       selected: null,
       newArray: [],
-      errors: {}
+      errors: {},
+      birthDate: ''
     }
   },
   methods: {
@@ -89,6 +90,9 @@ export default {
       Promise.all(promises)
         .then((res) => {
           this.memberDetail = res[0].data
+          this.birthDate = this.formatingDate(this.memberDetail.birthDate)
+          console.log(this.birthDate)
+          this.selected = this.memberDetail.ranting.id
         })
         .catch(e => console.log(e))
     },
@@ -109,7 +113,7 @@ export default {
       this.isSubmit()
       const data = {
         name: this.memberDetail.name,
-        birthDate: moment(this.formatingDate(this.memberDetail.birthDate)).locale('ID').format('DD-MM-YYYY'),
+        birthDate: moment(this.formatingDate(this.birthDate)).locale('ID').format('DD-MM-YYYY'),
         dobPlace: this.memberDetail.dobPlace,
         job: this.memberDetail.job,
         nbm: this.memberDetail.nbm,

@@ -5,7 +5,7 @@
       </b-col>
       <b-col cols="10" class="my-1">
         <h3>
-          Form Update Data Peserta
+          Form Data Peserta
         </h3>
     <div role="group">
       <b-form-group

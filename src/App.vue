@@ -13,7 +13,7 @@
             <router-link to="/"><a class="navbar-brand" href="#"> Home</a></router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/member"><a class="navbar-brand" href="#"> Peserta</a></router-link>
+            <router-link to="/member"><a class="navbar-brand" href="#"> Muzakki</a></router-link>
           </li>
           <li class="nav-item">
             <router-link to="/ranting"><a class="navbar-brand" href="#"> Ranting</a></router-link>
