@@ -5,7 +5,7 @@
       </b-col>
       <b-col cols="10" class="my-1">
         <h3>
-          Form Data Peserta
+          Form Data Ranting
         </h3>
     <div role="group">
       <b-form-group
