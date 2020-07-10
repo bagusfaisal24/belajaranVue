@@ -1,10 +1,9 @@
 <template>
   <div class="app">
     <nav class="navbar navbar-expand-md navbar-light" style="background-color: #4db5fa;">
-      <a class="navbar-brand fa fa-home" href="#"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
               aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"/>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -26,3 +25,11 @@
     </router-view>
   </div>
 </template>
+
+<style>
+  .navbar {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+</style>
