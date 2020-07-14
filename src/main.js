@@ -1,9 +1,12 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './App'
+import Vuesax from 'vuesax'
+import 'vuesax/dist/vuesax.css'
 import { BootstrapVue, FormDatepickerPlugin } from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'material-icons/iconfont/material-icons.css'
 import Home from './components/Home.vue'
 import Member from './components/member/Member.vue'
 import Ranting from './components/ranting/Ranting.vue'
@@ -16,6 +19,7 @@ axios.defaults.headers.common.Authorization = process.env.VUE_APP_AUTH_TOKEN
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.use(Vuesax)
 Vue.use(BootstrapVue)
 Vue.use(FormDatepickerPlugin)
 
