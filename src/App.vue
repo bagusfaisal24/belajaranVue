@@ -10,7 +10,7 @@
           <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
         </a>
       </li>
-      <li class="header">Another Menu</li>
+      <li class="header">Menu Utama</li>
       <li>
         <router-link to="/member">
           <i class="fa fa-users" aria-hidden="true"></i> Muzakki
@@ -21,10 +21,16 @@
           <i class="fa fa-list-alt" aria-hidden="true"></i> Ranting
         </router-link>
       </li>
+      <li class="header">Master Data</li>
+      <li>
+        <router-link to="/type-zakat">
+          <i class="fa fa-list-alt" aria-hidden="true"></i> Tipe Zakat
+        </router-link>
+      </li>
     </ul>
   </div>
   <div class="content-container">
-      <nav class="navbar navbar-expand-md navbar-light" style="background-color: #cccac0;">
+      <nav class="navbar navbar-expand-md navbar-light">
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
@@ -67,6 +73,9 @@ export default {
 </script>
 
 <style>
+  .navbar {
+    background-color: #E3E1D8;
+  }
   .sidebar-container {
     position: fixed;
     width: 220px;

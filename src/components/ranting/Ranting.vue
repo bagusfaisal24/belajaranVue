@@ -38,12 +38,7 @@
           :fields="fields"
           :current-page="currentPage"
           :per-page="perPage"
-          :filter="filter"
-          :filterIncludedFields="filterOn"
-          :sort-by.sync="sortBy"
-          :sort-desc.sync="sortDesc"
-          :sort-direction="sortDirection"
-          @filtered="onFiltered">
+          :filter="filter">
           <template slot="name" slot-scope="row">
             {{ row.value.name }}
           </template>
@@ -98,11 +93,11 @@ export default {
         { key: 'name', label: 'Nama Ranting', class: 'text-left' },
         { key: 'actions', label: 'Actions' }
       ],
-      totalRows: 1,
+      totalRows: null,
       currentPage: 1,
       perPage: 20,
-      sortBy: '',
-      sortDesc: false,
+      sortBy: null,
+      sortDesc: true,
       sortDirection: 'asc',
       filter: null,
       filterOn: []

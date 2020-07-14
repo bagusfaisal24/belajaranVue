@@ -10,6 +10,7 @@ import 'material-icons/iconfont/material-icons.css'
 import Home from './components/Home.vue'
 import Member from './components/member/Member.vue'
 import Ranting from './components/ranting/Ranting.vue'
+import ProductType from './components/master.data/ProductType.vue'
 import UpdateMember from './components/member/MemberFormUpdate.vue'
 import UpdateRanting from './components/ranting/RantingFormUpdate.vue'
 import axios from 'axios'
@@ -30,7 +31,8 @@ const routes = [
   { path: '/create/:type', component: UpdateMember, name: 'CreateNewMember' },
   { path: '/create/:type/:id', component: UpdateRanting, name: 'CreateNewRanting' },
   { path: '/:type/:id', component: UpdateRanting, name: 'UpdateRanting' },
-  { path: '/ranting', component: Ranting }
+  { path: '/ranting', component: Ranting },
+  { path: '/type-zakat', component: ProductType }
 ]
 
 const router = new VueRouter({ routes })
