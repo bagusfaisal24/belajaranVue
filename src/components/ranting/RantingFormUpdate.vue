@@ -26,6 +26,8 @@
     </div>
     <b-button class="mt-3" variant="outline-primary" block @click="postData">Simpan</b-button>
       </b-col>
+      <b-col>
+      </b-col>
     </b-row>
   </b-container>
 </template>

@@ -1,8 +1,8 @@
 <template>
-  <div class="app">
+<div class="app">
   <div class="sidebar-container">
     <div class="sidebar-logo">
-      Project Name
+      Lazizmu System
     </div>
     <ul class="sidebar-navigation">
       <li>
@@ -24,10 +24,19 @@
     </ul>
   </div>
   <div class="content-container">
+      <nav class="navbar navbar-expand-md navbar-light" style="background-color: #cccac0;">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+            </li>
+          </ul>
+          <a class="navbar-brand fa fa-sign-out" href="#"> Keluar</a>
+        </div>
+      </nav>
         <router-view>
         </router-view>
   </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -70,13 +79,13 @@ export default {
   }
 
   .content-container {
-    padding-top: 20px;
+    padding-top: 0;
   }
 
   .sidebar-logo {
     padding: 10px 15px 10px 30px;
     font-size: 20px;
-    background-color: #2574A9;
+    background-color: #bda108;
   }
 
   .sidebar-navigation {

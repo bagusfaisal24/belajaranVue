@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-col>
-        <h3>
+        <h3 class="header">
           Data Ranting
         </h3>
       </b-col>
@@ -23,7 +23,7 @@
           </b-input-group>
       </b-col>
       <b-row>
-        <b-col>
+        <b-col class="tambah-data">
           <b-button id="show-btn" variant="outline-primary" :to="{ name: 'CreateNewRanting', params: { type: 'new' } }">Tambah Data</b-button>
         </b-col>
       </b-row>
@@ -152,5 +152,15 @@ export default {
 </script>
 
 <style scoped>
-
+  .container{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .tambah-data {
+    margin-left: 400px;
+  }
+  .header {
+    text-align: center;
+  }
 </style>
