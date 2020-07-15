@@ -51,19 +51,16 @@
             {{ row.value.dobPlace }}
           </template>
           <template v-slot:cell(actions)="{ detailsShowing, item }">
-            <b-row class="mb-1">
-              <b-col cols="0">
-                <b-button size="sm" @click="toggleDetails(item)"  variant="warning">
+                <b-button size="sm" @click="toggleDetails(item)"  variant="warning"><i class="fa fa-th-list" aria-hidden="true">
                   {{ detailsShowing ? 'Sembunyikan' : 'Lihat' }} Detail
-                </b-button>
-              </b-col>
-              <b-col cols="3">
-                  <b-button size="sm" variant="info"
+                </i></b-button>
+                <b-button size="sm" variant="info"
                             :to="{ name: 'UpdateMember', params: { id: item.id, type: 'update' } }">
                     Update
-                  </b-button>
-              </b-col>
-            </b-row>
+                 </b-button>
+                <b-button size="sm" variant="danger" @click="hapusData(item.id)"><i class="fa fa-trash" aria-hidden="true">
+                  Delete
+                </i></b-button>
           </template>
           <template v-slot:row-details="{ item }">
             <b-card>
@@ -95,6 +92,7 @@
 
 <script>
 import MemberSvc from '../../service/MemberSvc'
+import ErrorSvc from '../../ErrorSvc'
 import moment from 'moment'
 
 export default {
@@ -137,7 +135,10 @@ export default {
       MemberSvc.getMember()
         .then((res) => {
           this.members = res.data
-        }).catch(e => console.log(e))
+        }).catch(e => {
+          this.errors = ErrorSvc.getError(e)
+          this.showToast(this.errors)
+        })
     },
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
@@ -146,6 +147,24 @@ export default {
     },
     formatingDate (date) {
       return moment(date).locale('ID').format('DD MMMM YYYY')
+    },
+    hapusData (id) {
+      MemberSvc.deleteData(id)
+        .then((res) => {
+          this.showNotification(res.data.message)
+          this.getDataMember()
+        })
+    },
+    redirect () {
+      this.$route.push('/member')
+    },
+    showNotification (message) {
+      const variant = 'success'
+      this.$bvToast.toast(message, {
+        title: 'Sukses',
+        autoHideDelay: 5000,
+        variant
+      })
     },
     toggleDetails (row) {
       if (row._showDetails) {
@@ -158,6 +177,14 @@ export default {
           this.$set(row, '_showDetails', true)
         })
       }
+    },
+    showToast (message) {
+      const variant = 'danger'
+      this.$bvToast.toast(message, {
+        title: 'Terjadi Kesalahan',
+        autoHideDelay: 5000,
+        variant
+      })
     }
   }
 }

@@ -74,7 +74,7 @@ export default {
 
 <style>
   .navbar {
-    background-color: #E3E1D8;
+    background-color: #FFFDF4;
   }
   .sidebar-container {
     position: fixed;
@@ -94,7 +94,7 @@ export default {
   .sidebar-logo {
     padding: 10px 15px 10px 30px;
     font-size: 20px;
-    background-color: #bda108;
+    background-color: #2574A9;
   }
 
   .sidebar-navigation {

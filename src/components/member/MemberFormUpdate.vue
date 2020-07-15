@@ -14,28 +14,45 @@
             label="Nama">
             <b-form-input
               id="name"
-              v-model="memberDetail.name"/>
+              v-model="name"
+              :state="nameState"
+              @change="onChangeName"
+              aria-describedby="input-live-help input-live-feedback"
+              trim
+              placeholder="Nama Lengkap"/>
+            <b-form-invalid-feedback id="input-live-feedback">
+              {{ messageError != null ? messageError : 'tidak boleh kosong' }}
+            </b-form-invalid-feedback>
           </b-form-group>
           <b-form-group
             label-cols-sm="3"
             label="Tempat Lahir">
             <b-form-input
               id="dob-place"
-              v-model="memberDetail.dobPlace"/>
+              v-model="dobPlace"
+              placeholder="Tempat Lahir"/>
           </b-form-group>
           <b-form-group
             label-cols-sm="3"
             label="Pekerjaan">
             <b-form-input
               id="job"
-              v-model="memberDetail.job"/>
+              v-model="job"
+              :state="jobState"
+              @change="onChangejob"
+              aria-describedby="input-live-help input-live-feedback"
+              placeholder="Pekerjaan"/>
+            <b-form-invalid-feedback id="input-live-feedback">
+              {{ messageError != null ? messageError : 'tidak boleh kosong' }}
+            </b-form-invalid-feedback>
           </b-form-group>
           <b-form-group
             label-cols-sm="3"
             label="NBM">
             <b-form-input
               id="nbm"
-              v-model="memberDetail.nbm"/>
+              v-model="nbm"
+              placeholder="NBM"/>
           </b-form-group>
           <b-form-group
             label-cols-sm="3"
@@ -79,7 +96,14 @@ export default {
       selected: null,
       newArray: [],
       errors: {},
-      birthDate: ''
+      birthDate: null,
+      name: '',
+      dobPlace: '',
+      job: '',
+      nbm: null,
+      nameState: null,
+      jobState: null,
+      messageError: null
     }
   },
   methods: {
@@ -91,10 +115,16 @@ export default {
         .then((res) => {
           this.memberDetail = res[0].data
           this.birthDate = this.formatingDate(this.memberDetail.birthDate)
-          console.log(this.birthDate)
           this.selected = this.memberDetail.ranting.id
+          this.name = this.memberDetail.name
+          this.dobPlace = this.memberDetail.dobPlace
+          this.job = this.memberDetail.job
+          this.nbm = this.memberDetail.nbm
         })
-        .catch(e => console.log(e))
+        .catch(e => {
+          this.errors = ErrorSvc.getError(e)
+          this.showToast(this.errors)
+        })
     },
     getDataRanting () {
       this.isLoading()
@@ -107,16 +137,19 @@ export default {
             return { value: val.id, text: val.name }
           })
         })
-        .catch(e => console.log(e))
+        .catch(e => {
+          this.errors = ErrorSvc.getError(e)
+          this.showToast(this.errors)
+        })
     },
     postData () {
       this.isSubmit()
       const data = {
-        name: this.memberDetail.name,
+        name: this.name,
         birthDate: moment(this.formatingDate(this.birthDate)).locale('ID').format('DD-MM-YYYY'),
-        dobPlace: this.memberDetail.dobPlace,
-        job: this.memberDetail.job,
-        nbm: this.memberDetail.nbm,
+        dobPlace: this.dobPlace,
+        job: this.job,
+        nbm: this.nbm,
         rantingId: this.selected
       }
       if (this.$route.params.type === 'update') {
@@ -126,8 +159,13 @@ export default {
             this.showNotification('Berhasil Menyimpan')
           })
           .catch(e => {
-            this.errors = ErrorSvc.getError(e)
-            this.showToast(this.errors)
+            if (this.name.length === 0) {
+              this.nameState = false
+            }
+            if (this.job.length === 0) {
+              this.jobState = false
+            }
+            console.log(e)
           })
       } else {
         MemberSvc.submitForm(data)
@@ -135,9 +173,11 @@ export default {
             this.isSubmit()
             this.showNotification('Berhasil Menyimpan')
           })
-          .catch(e => {
+          .catch((e) => {
             this.errors = ErrorSvc.getError(e)
             this.showToast(this.errors)
+            this.error = e.response.data
+            this.fetchErrorData(this.error)
           })
       }
     },
@@ -147,8 +187,25 @@ export default {
     isLoading () {
       this.loading = !this.loading
     },
+    onChangeName () {
+      this.nameState = this.name.length !== 0
+    },
+    onChangejob () {
+      this.jobState = this.job.length !== 0
+    },
     formatingDate (date) {
       return new Date(date)
+    },
+    fetchErrorData (data) {
+      data.errors.forEach((detail) => {
+        if (detail.field === 'name') {
+          this.nameState = false
+          this.messageError = detail.defaultMessage
+        } else if (detail.field === 'job') {
+          this.jobState = false
+          this.messageError = detail.defaultMessage
+        }
+      })
     },
     showNotification (message) {
       const variant = 'success'
@@ -177,5 +234,8 @@ export default {
 </script>
 
 <style scoped>
+  .p {
+    color: red;
+  }
 
 </style>

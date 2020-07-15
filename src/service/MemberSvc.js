@@ -18,5 +18,9 @@ export default {
   updateData (data, id) {
     return axios
       .post(`${MEMBER_URI}${id}/update`, data, config)
+  },
+  deleteData (id) {
+    return axios
+      .delete(`${MEMBER_URI}${id}/delete`)
   }
 }
