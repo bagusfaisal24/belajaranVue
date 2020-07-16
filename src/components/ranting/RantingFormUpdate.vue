@@ -13,14 +13,30 @@
         label="Nama">
         <b-form-input
           id="name"
-          v-model="rantingDetail.name"/>
+          v-model="name"
+          :state="nameState"
+          @change="onChangeName"
+          aria-describedby="input-live-help input-live-feedback"
+          trim
+          placeholder="Nama Ranting"/>
+        <b-form-invalid-feedback id="input-live-feedback">
+          {{ messageError != null ? messageError : 'tidak boleh kosong' }}
+        </b-form-invalid-feedback>
       </b-form-group>
       <b-form-group
         label-cols-sm="3"
         label="Ketua Ranting">
         <b-form-input
           id="ketua-ranting"
-          v-model="rantingDetail.ketuaRanting"/>
+          v-model="ketuaRanting"
+          :state="ketuaRantingState"
+          @change="onChangeKetua"
+          aria-describedby="input-live-help input-live-feedback"
+          trim
+          placeholder="Ketua Ranting"/>
+        <b-form-invalid-feedback id="input-live-feedback">
+          {{ messageError != null ? messageError : 'tidak boleh kosong' }}
+        </b-form-invalid-feedback>
       </b-form-group>
       <hr/>
     </div>
@@ -41,7 +57,12 @@ export default {
   data () {
     return {
       rantingDetail: {},
-      errors: {}
+      errors: {},
+      name: null,
+      ketuaRanting: null,
+      nameState: null,
+      ketuaRantingState: null,
+      messageError: null
     }
   },
   methods: {
@@ -52,14 +73,16 @@ export default {
       Promise.all(promises)
         .then((res) => {
           this.rantingDetail = res[0].data
+          this.name = this.rantingDetail.name
+          this.ketuaRanting = this.rantingDetail.ketuaRanting
         })
         .catch(e => console.log(e))
     },
     postData () {
       this.isSubmit()
       const data = {
-        name: this.rantingDetail.name,
-        ketuaRanting: this.rantingDetail.ketuaRanting
+        name: this.name,
+        ketuaRanting: this.ketuaRanting
       }
       if (this.$route.params.type === 'new') {
         RantingSvc.submitForm(data)
@@ -70,6 +93,8 @@ export default {
           .catch(e => {
             this.errors = ErrorSvc.getError(e)
             this.showToast(this.errors)
+            this.error = e.response.data
+            this.fetchErrorData(this.error)
           })
       } else {
         RantingSvc.updateData(data, this.rantingDetail.id)
@@ -88,6 +113,23 @@ export default {
     },
     isLoading () {
       this.loading = !this.loading
+    },
+    onChangeName () {
+      this.nameState = this.name.length !== 0
+    },
+    onChangeKetua () {
+      this.ketuaRantingState = this.ketuaRanting.length !== 0
+    },
+    fetchErrorData (data) {
+      data.errors.forEach((detail) => {
+        if (detail.field === 'name') {
+          this.nameState = false
+          this.messageError = detail.defaultMessage
+        } else if (detail.field === 'ketuaRanting') {
+          this.ketuaRantingState = false
+          this.messageError = detail.defaultMessage
+        }
+      })
     },
     showNotification (message) {
       const variant = 'success'

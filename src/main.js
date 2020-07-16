@@ -27,10 +27,10 @@ Vue.use(FormDatepickerPlugin)
 const routes = [
   { path: '/', component: Home },
   { path: '/member', component: Member },
-  { path: '/:type/:id', component: UpdateMember, name: 'UpdateMember' },
-  { path: '/create/:type', component: UpdateMember, name: 'CreateNewMember' },
-  { path: '/create/:type/:id', component: UpdateRanting, name: 'CreateNewRanting' },
-  { path: '/:type/:id', component: UpdateRanting, name: 'UpdateRanting' },
+  { path: '/member/:type/:id', component: UpdateMember, name: 'UpdateMember' },
+  { path: '/member/create/:type', component: UpdateMember, name: 'CreateNewMember' },
+  { path: '/ranting/create/:type', component: UpdateRanting, name: 'CreateNewRanting' },
+  { path: '/ranting/:type/:id', component: UpdateRanting, name: 'UpdateRanting' },
   { path: '/ranting', component: Ranting },
   { path: '/type-zakat', component: ProductType }
 ]

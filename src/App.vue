@@ -24,7 +24,7 @@
       <li class="header">Master Data</li>
       <li>
         <router-link to="/type-zakat">
-          <i class="fa fa-list-alt" aria-hidden="true"></i> Tipe Zakat
+          <i class="fa fa-list-ul" aria-hidden="true"></i> Tipe Zakat
         </router-link>
       </li>
     </ul>

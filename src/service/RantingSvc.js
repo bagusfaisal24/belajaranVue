@@ -18,5 +18,9 @@ export default {
   updateData (data, id) {
     return axios
       .post(`${RANTING_URI}${id}/update`, data, config)
+  },
+  deleteData (id) {
+    return axios
+      .delete(`${RANTING_URI}${id}/delete`, config)
   }
 }

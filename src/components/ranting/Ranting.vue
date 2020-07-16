@@ -43,19 +43,16 @@
             {{ row.value.name }}
           </template>
           <template v-slot:cell(actions)="{ detailsShowing, item }">
-            <b-row class="mb-1">
-              <b-col cols="0">
                 <b-button size="sm" @click="toggleDetails(item)"  variant="warning">
                   {{ detailsShowing ? 'Sembunyikan' : 'Lihat' }} Detail
                 </b-button>
-              </b-col>
-              <b-col cols="3">
                 <b-button size="sm" variant="info"
                           :to="{ name: 'UpdateRanting', params: { id: item.id, type: 'update' } }">
                   Update
                 </b-button>
-              </b-col>
-            </b-row>
+                <b-button size="sm" variant="danger" @click="hapusData(item.id)"><i class="fa fa-trash" aria-hidden="true">
+                  Delete
+                </i></b-button>
           </template>
           <template v-slot:row-details="{ item }">
             <b-card>
@@ -83,6 +80,7 @@
 
 <script>
 import RantingSvc from '../../service/RantingSvc'
+import ErrorSvc from '../../ErrorSvc'
 
 export default {
   name: 'Ranting',
@@ -123,12 +121,30 @@ export default {
       RantingSvc.getRanting()
         .then((res) => {
           this.rantings = res.data
-        }).catch(e => console.log(e))
+        }).catch(e => {
+          this.errors = ErrorSvc.getError(e)
+          this.showToast(this.errors)
+        })
+    },
+    hapusData (id) {
+      RantingSvc.deleteData(id)
+        .then((res) => {
+          this.showNotification(res.data.message)
+          this.getDataRanting()
+        })
     },
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
       this.currentPage = 1
+    },
+    showNotification (message) {
+      const variant = 'success'
+      this.$bvToast.toast(message, {
+        title: 'Sukses',
+        autoHideDelay: 5000,
+        variant
+      })
     },
     toggleDetails (row) {
       if (row._showDetails) {
