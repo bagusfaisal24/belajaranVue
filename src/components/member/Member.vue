@@ -50,17 +50,25 @@
           <template slot="dobPlace" slot-scope="row">
             {{ row.value.dobPlace }}
           </template>
-          <template v-slot:cell(actions)="{ detailsShowing, item }">
-                <b-button size="sm" @click="toggleDetails(item)"  variant="warning"><i class="fa fa-th-list" aria-hidden="true">
-                  {{ detailsShowing ? 'Sembunyikan' : 'Lihat' }} Detail
-                </i></b-button>
+          <template v-slot:cell(actions)="{ item }">
+            <b-row>
+              <b-col md="1">
+                <b-button size="sm" @click="toggleDetails(item)" variant="warning"><i class="fa fa-align-justify" aria-hidden="true"/></b-button>
+              </b-col>
+              <b-col md="1">
                 <b-button size="sm" variant="info"
-                            :to="{ name: 'UpdateMember', params: { id: item.id, type: 'update' } }">
-                    Update
+                            :to="{ name: 'UpdateMember', params: { id: item.id, type: 'update' } }"><i class="fa fa-pencil-square-o" aria-hidden="true"/>
                  </b-button>
-                <b-button size="sm" variant="danger" @click="hapusData(item.id)"><i class="fa fa-trash" aria-hidden="true">
-                  Delete
-                </i></b-button>
+              </b-col>
+              <b-col md="1">
+                <b-button id="toggle-btn" size="sm" variant="danger" @click="showModal(item.id)"><i class="fa fa-trash" aria-hidden="true"/></b-button>
+                <b-modal v-model="myModal" hide-footer title="Anda Yakin Hapus">
+                <div class="d-block text-center">
+                  <b-button class="mt-3" variant="outline-danger" block @click="hapusData(selectedId)">Hapus</b-button>
+                </div>
+              </b-modal>
+              </b-col>
+            </b-row>
           </template>
           <template v-slot:row-details="{ item }">
             <b-card>
@@ -112,7 +120,9 @@ export default {
       sortDesc: false,
       sortDirection: 'asc',
       filter: null,
-      filterOn: []
+      filterOn: [],
+      selectedId: null,
+      myModal: false
     }
   },
   computed: {
@@ -153,10 +163,15 @@ export default {
         .then((res) => {
           this.showNotification(res.data.message)
           this.getDataMember()
+        }).catch(e => {
+          this.errors = ErrorSvc.getError(e)
+          this.showToast(this.errors)
         })
+      this.myModal = false
     },
-    redirect () {
-      this.$route.push('/member')
+    showModal (id) {
+      this.selectedId = id
+      this.myModal = true
     },
     showNotification (message) {
       const variant = 'success'

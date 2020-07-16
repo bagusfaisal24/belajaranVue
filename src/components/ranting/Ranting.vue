@@ -43,16 +43,25 @@
             {{ row.value.name }}
           </template>
           <template v-slot:cell(actions)="{ detailsShowing, item }">
-                <b-button size="sm" @click="toggleDetails(item)"  variant="warning">
-                  {{ detailsShowing ? 'Sembunyikan' : 'Lihat' }} Detail
+            <b-row>
+              <b-col md="1">
+                <b-button size="sm" @click="toggleDetails(item)" variant="warning"><i class="fa fa-align-justify" aria-hidden="true"/>
                 </b-button>
+              </b-col>
+              <b-col md="1">
                 <b-button size="sm" variant="info"
-                          :to="{ name: 'UpdateRanting', params: { id: item.id, type: 'update' } }">
-                  Update
+                          :to="{ name: 'UpdateRanting', params: { id: item.id, type: 'update' } }"><i class="fa fa-pencil-square-o" aria-hidden="true"/>
                 </b-button>
-                <b-button size="sm" variant="danger" @click="hapusData(item.id)"><i class="fa fa-trash" aria-hidden="true">
-                  Delete
-                </i></b-button>
+              </b-col>
+              <b-col md="1">
+               <b-button size="sm" variant="danger" @click="showModal(item.id)"><i class="fa fa-trash" aria-hidden="true"/></b-button>
+                <b-modal v-model="myModal" hide-footer title="Anda Yakin Hapus">
+                  <div class="d-block text-center">
+                    <b-button class="mt-3" variant="outline-danger" block @click="hapusData(selectedId)">Hapus</b-button>
+                  </div>
+                </b-modal>
+              </b-col>
+            </b-row>
           </template>
           <template v-slot:row-details="{ item }">
             <b-card>
@@ -81,9 +90,13 @@
 <script>
 import RantingSvc from '../../service/RantingSvc'
 import ErrorSvc from '../../ErrorSvc'
+// import PopModal from '../master.data/PopModal'
 
 export default {
   name: 'Ranting',
+  // components: {
+  //   PopModal
+  // },
   data () {
     return {
       rantings: [],
@@ -98,7 +111,9 @@ export default {
       sortDesc: true,
       sortDirection: 'asc',
       filter: null,
-      filterOn: []
+      filterOn: [],
+      selectedId: null,
+      myModal: false
     }
   },
   computed: {
@@ -131,7 +146,15 @@ export default {
         .then((res) => {
           this.showNotification(res.data.message)
           this.getDataRanting()
+        }).catch(e => {
+          this.errors = ErrorSvc.getError(e)
+          this.showToast(this.errors)
         })
+      this.myModal = false
+    },
+    showModal (id) {
+      this.selectedId = id
+      this.myModal = true
     },
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
