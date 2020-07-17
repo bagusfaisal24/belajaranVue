@@ -77,7 +77,7 @@
       <b-col cols="12" class="my-1">
         <b-pagination
           v-model="currentPage"
-          :total-rows="totalRows"
+          :total-rows="rows"
           :per-page="perPage"
           align="fill"
           size="sm"
@@ -106,9 +106,8 @@ export default {
         { key: 'productType.name', label: 'Tipe Zakat', class: 'text-left' },
         { key: 'actions', label: 'Actions' }
       ],
-      totalRows: null,
       currentPage: 1,
-      perPage: 20,
+      perPage: 15,
       sortBy: null,
       sortDesc: true,
       sortDirection: 'asc',
@@ -124,10 +123,12 @@ export default {
         .map(f => {
           return { text: f.label, value: f.key }
         })
+    },
+    rows () {
+      return this.zakat.length
     }
   },
   mounted () {
-    this.totalRows = this.zakat.length
     this.getDataZakat()
   },
   methods: {

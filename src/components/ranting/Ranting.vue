@@ -31,6 +31,7 @@
     <b-row>
       <b-col cols="12">
         <b-table
+          id="my-table"
           show-empty
           small
           stacked="md"
@@ -39,9 +40,6 @@
           :current-page="currentPage"
           :per-page="perPage"
           :filter="filter">
-          <template slot="name" slot-scope="row">
-            {{ row.value.name }}
-          </template>
           <template v-slot:cell(actions)="{ detailsShowing, item }">
             <b-row>
               <b-col md="1">
@@ -82,11 +80,12 @@
       <b-col cols="12" class="my-1">
         <b-pagination
           v-model="currentPage"
-          :total-rows="totalRows"
+          :total-rows="rows"
           :per-page="perPage"
           align="fill"
           size="sm"
           class="my-0"
+          aria-controls="my-table"
         />
       </b-col>
     </b-row>
@@ -114,7 +113,7 @@ export default {
       ],
       totalRows: null,
       currentPage: 1,
-      perPage: 20,
+      perPage: 10,
       sortBy: null,
       sortDesc: true,
       sortDirection: 'asc',
@@ -132,11 +131,13 @@ export default {
         .map(f => {
           return { text: f.label, value: f.key }
         })
+    },
+    rows () {
+      return this.rantings.length
     }
   },
   mounted () {
     // Set the initial number of items
-    this.totalRows = this.rantings.length
     this.getDataRanting()
   },
   methods: {

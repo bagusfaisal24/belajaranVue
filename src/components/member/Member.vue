@@ -97,7 +97,7 @@
       <b-col cols="12" class="my-1">
         <b-pagination
           v-model="currentPage"
-          :total-rows="totalRows"
+          :total-rows="rows"
           :per-page="perPage"
           align="fill"
           size="sm"
@@ -125,9 +125,8 @@ export default {
         { key: 'dobPlace', label: 'Tempat Lahir', class: 'text-left' },
         { key: 'actions', label: 'Actions' }
       ],
-      totalRows: 1,
       currentPage: 1,
-      perPage: 20,
+      perPage: 15,
       sortBy: '',
       sortDesc: false,
       sortDirection: 'asc',
@@ -145,11 +144,13 @@ export default {
         .map(f => {
           return { text: f.label, value: f.key }
         })
+    },
+    rows () {
+      return this.members.length
     }
   },
   mounted () {
     // Set the initial number of items
-    this.totalRows = this.members.length
     this.getDataMember()
   },
   methods: {
