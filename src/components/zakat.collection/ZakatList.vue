@@ -24,7 +24,7 @@
       </b-col>
       <b-row>
         <b-col class="tambah-data">
-          <b-button id="show-btn" variant="outline-primary">Tambah Data</b-button>
+          <b-button id="show-btn" variant="outline-primary" :to="{ name: 'newZakat', params: { type: 'new' } }">Tambah Data</b-button>
         </b-col>
       </b-row>
     </b-row>
@@ -48,24 +48,12 @@
                 <b-button size="sm" @click="toggleDetails(item)" variant="warning"><i class="fa fa-align-justify" aria-hidden="true"/>
                 </b-button>
               </b-col>
-              <b-col md="1">
-                <b-button size="sm" variant="info"
-                          :to="{ name: 'UpdateRanting', params: { id: item.id, type: 'update' } }"><i class="fa fa-pencil-square-o" aria-hidden="true"/>
-                </b-button>
-              </b-col>
-              <b-col md="1">
-                <b-button size="sm" variant="danger"><i class="fa fa-trash" aria-hidden="true"/></b-button>
-                <b-modal hide-footer title="Anda Yakin Hapus">
-                  <div class="d-block text-center">
-                    <b-button class="mt-3" variant="outline-danger">Hapus</b-button>
-                  </div>
-                </b-modal>
-              </b-col>
             </b-row>
           </template>
           <template v-slot:row-details="{ item }">
             <b-card>
               <p>Muzakki: {{ item.member.name }}</p>
+              <p>NBM: {{ item.member.nbm }}</p>
               <p>Asal Ranting : {{ item.member.ranting.name }}</p>
               <p>Tipe Zakat : {{ item.productType.name }}</p>
               <p>Tanggal Zakat : {{ formatingDate(item.submitDate) }}</p>
@@ -144,14 +132,6 @@ export default {
       const variant = 'danger'
       this.$bvToast.toast(message, {
         title: 'Terjadi Kesalahan',
-        autoHideDelay: 5000,
-        variant
-      })
-    },
-    showNotification (message) {
-      const variant = 'success'
-      this.$bvToast.toast(message, {
-        title: 'Sukses',
         autoHideDelay: 5000,
         variant
       })

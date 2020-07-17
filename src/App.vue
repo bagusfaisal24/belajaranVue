@@ -18,7 +18,7 @@
       </li>
       <li>
         <router-link to="/ranting">
-          <i class="fa fa-list-alt" aria-hidden="true"/>Ranting
+          <i class="fa fa-list-alt" aria-hidden="true"/> Ranting
         </router-link>
       </li>
       <li class="header">Pencatatan Zakat</li>
