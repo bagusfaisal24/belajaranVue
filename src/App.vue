@@ -7,24 +7,30 @@
     <ul class="sidebar-navigation">
       <li>
         <a href="#">
-          <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
+          <i class="fa fa-tachometer" aria-hidden="true"/> Dashboard
         </a>
       </li>
       <li class="header">Menu Utama</li>
       <li>
         <router-link to="/member">
-          <i class="fa fa-users" aria-hidden="true"></i> Muzakki
+          <i class="fa fa-users" aria-hidden="true"/> Muzakki
         </router-link>
       </li>
       <li>
         <router-link to="/ranting">
-          <i class="fa fa-list-alt" aria-hidden="true"></i> Ranting
+          <i class="fa fa-list-alt" aria-hidden="true"/>Ranting
+        </router-link>
+      </li>
+      <li class="header">Pencatatan Zakat</li>
+      <li>
+        <router-link to="/zakat">
+          <i class="fa fa-list-alt" aria-hidden="true"/> Daftar Zakat
         </router-link>
       </li>
       <li class="header">Master Data</li>
       <li>
         <router-link to="/type-zakat">
-          <i class="fa fa-list-ul" aria-hidden="true"></i> Tipe Zakat
+          <i class="fa fa-list-ul" aria-hidden="true"/> Tipe Zakat
         </router-link>
       </li>
     </ul>

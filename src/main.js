@@ -13,6 +13,7 @@ import Ranting from './components/ranting/Ranting.vue'
 import ProductType from './components/master.data/ProductType.vue'
 import UpdateMember from './components/member/MemberFormUpdate.vue'
 import UpdateRanting from './components/ranting/RantingFormUpdate.vue'
+import ZakatList from './components/zakat.collection/ZakatList.vue'
 import axios from 'axios'
 
 axios.defaults.baseURL = process.env.VUE_APP_ROOT_API
@@ -32,7 +33,8 @@ const routes = [
   { path: '/ranting/create/:type', component: UpdateRanting, name: 'CreateNewRanting' },
   { path: '/ranting/:type/:id', component: UpdateRanting, name: 'UpdateRanting' },
   { path: '/ranting', component: Ranting },
-  { path: '/type-zakat', component: ProductType }
+  { path: '/type-zakat', component: ProductType },
+  { path: '/zakat', component: ZakatList }
 ]
 
 const router = new VueRouter({ routes })
