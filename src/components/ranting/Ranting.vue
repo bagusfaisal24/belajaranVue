@@ -65,8 +65,16 @@
           </template>
           <template v-slot:row-details="{ item }">
             <b-card>
-              <p>Nama: {{ item.name }}</p>
-              <p>Ketua Ranting : {{ item.ketuaRanting }}</p>
+              <table>
+                <tr>
+                  <th>Nama Ranting</th>
+                  <th>Ketua Ranting</th>
+                </tr>
+                <tr>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.ketuaRanting }}</td>
+                </tr>
+              </table>
             </b-card>
           </template>
         </b-table>
@@ -196,5 +204,18 @@ export default {
   }
   .header {
     text-align: center;
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  tr:nth-child(even) {
+    background-color: #dddddd;
   }
 </style>

@@ -52,12 +52,24 @@
           </template>
           <template v-slot:row-details="{ item }">
             <b-card>
-              <p>Muzakki: {{ item.member.name }}</p>
-              <p>NBM: {{ item.member.nbm }}</p>
-              <p>Asal Ranting : {{ item.member.ranting.name }}</p>
-              <p>Tipe Zakat : {{ item.productType.name }}</p>
-              <p>Tanggal Zakat : {{ formatingDate(item.submitDate) }}</p>
-              <p>Jumlah Zakat : {{ currenctFormat(item.amount) }}</p>
+              <table>
+                <tr>
+                  <th>Muzakki</th>
+                  <th>NBM</th>
+                  <th>Asal Ranting</th>
+                  <th>Tipe Zakat</th>
+                  <th>Tanggal Zakat</th>
+                  <th>Jumlah Zakat</th>
+                </tr>
+                <tr>
+                  <td> {{ item.member.name }}</td>
+                  <td> {{ item.member.nbm }}</td>
+                  <td> {{ item.member.ranting.name }}</td>
+                  <td> {{ item.productType.name }}</td>
+                  <td> {{ formatingDate(item.submitDate) }}</td>
+                  <td> {{ currenctFormat(item.amount) }}</td>
+                </tr>
+              </table>
             </b-card>
           </template>
         </b-table>
@@ -169,5 +181,18 @@ export default {
   }
   .header {
     text-align: center;
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  tr:nth-child(even) {
+    background-color: #dddddd;
   }
 </style>

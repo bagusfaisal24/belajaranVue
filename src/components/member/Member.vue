@@ -72,12 +72,24 @@
           </template>
           <template v-slot:row-details="{ item }">
             <b-card>
-              <p>Nama: {{ item.name }}</p>
-              <p>Tempat Lahir : {{ item.dobPlace }}</p>
-              <p>Tanggal Lahir : {{ formatingDate(item.birthDate) }}</p>
-              <p>Pekerjaan : {{ item.job }}</p>
-              <p>NBM : {{ item.nbm }}</p>
-              <p>Ranting : {{ item.ranting.name }}</p>
+              <table>
+                <tr>
+                  <th>Nama</th>
+                  <th>Tempat Lahir</th>
+                  <th>Tanggal Lahir</th>
+                  <th>Pekerjaan</th>
+                  <th>NBM</th>
+                  <th>Ranting</th>
+                </tr>
+                <tr>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.dobPlace }}</td>
+                  <td>{{ formatingDate(item.birthDate)}}</td>
+                  <td>{{ item.job }}</td>
+                  <td>{{ item.nbm }}</td>
+                  <td>{{ item.ranting.name }}</td>
+                </tr>
+              </table>
             </b-card>
           </template>
         </b-table>
@@ -216,5 +228,18 @@ export default {
   }
   .header {
     text-align: center;
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  tr:nth-child(even) {
+    background-color: #dddddd;
   }
 </style>
