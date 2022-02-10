@@ -33,7 +33,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "sass": "^1.23.0-module.beta.1",
     "stylus": "^0.54.7",
     "stylus-loader": "^2.5.1",
